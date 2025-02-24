@@ -8,11 +8,9 @@ const res = NextResponse
 export async function POST(req) {
     try {
         let {name,email,password,avatar} = await req.json()
-        if(!name && !email && !password){
+        if(!name || !email || !password){
             return res.json({error:"all fields are required expect profile pic",status:401})
         }
-       
-        console.log(avatar);
         if(!avatar){
             avatar = "/nodp.jpg"
         }

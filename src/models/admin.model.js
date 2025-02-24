@@ -1,5 +1,5 @@
 import {model, models, Schema} from "mongoose";
-
+import bcrypt from "bcryptjs"
 const adminSchema = new Schema({
     name:{
         type:String,

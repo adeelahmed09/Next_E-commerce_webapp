@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import gsap from 'gsap';
 import { SessionProvider, useSession } from "next-auth/react";
+
 function Nav() {
     gsap.registerPlugin();
     const { data: session, status } = useSession();
@@ -20,6 +21,7 @@ function Nav() {
         useEffect(() => {
             if (status === "authenticated") {
                 setIsLoggedIn(true);
+                console.log(session);
             } else {
                 setIsLoggedIn(false);
             }
@@ -42,6 +44,9 @@ function Nav() {
                     <>
                         <Link href={"/profile"}>Profile</Link>
                         <Link href={"/api/auth/signout"}>Sign Out</Link>
+                        {
+                            session.user.role==="admin"?<Link href={"/admin/dashboard"}>Manage</Link>:""
+                        }
                     </>
                 )}
             </div>
@@ -96,7 +101,7 @@ function Nav() {
     return (
         <>
             <SessionProvider>
-                <div className="w-full sticky bg-white top-0 text-lg flex select-none justify-between items-center px-6 py-5">
+                <div className="w-full sticky bg-white top-0 text-lg flex select-none border-b border-zinc-300 justify-between items-center px-6 py-5">
                     <div>
                         <h1 className="text-3xl text-zinc-800 font-bold">
                             New <span className="text-red-500">Zone</span>
