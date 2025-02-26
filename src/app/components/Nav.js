@@ -33,24 +33,36 @@ function Nav() {
 
         return (
             <div
-                className={`pr-3 pl-2 border-2 border-zinc-300 py-3 w-30 rounded-md bg-white flex-col flex`}
+                className={`pr-3 pl-2 gap-3 sm:gap-2 border-2 border-zinc-300 py-3 w-30 rounded-md bg-white flex-col flex`}
             >
                 {!isLoggedIn ? (
                     <>
-                        <Link href={"/log-in"}>Log In</Link>
-                        <Link href={"/sign-up"}>Sign up</Link>
+                        <Link onClick={onClickProfileLinkButton} href={"/log-in"}>Log In</Link>
+                        <Link onClick={onClickProfileLinkButton} href={"/sign-up"}>Sign up</Link>
                     </>
                 ) : (
                     <>
-                        <Link href={"/profile"}>Profile</Link>
-                        <Link href={"/api/auth/signout"}>Sign Out</Link>
+                        <Link onClick={onClickProfileLinkButton} href={"/profile"}>Profile</Link>
+                        <Link onClick={onClickProfileLinkButton} href={"/api/auth/signout"}>Sign Out</Link>
                         {
-                            session.user.role==="admin"?<Link href={"/admin/dashboard"}>Manage</Link>:""
+                            session.user.role==="admin"?<Link onClick={onClickProfileLinkButton} href={"/admin/dashboard"}>Manage</Link>:""
                         }
                     </>
                 )}
             </div>
         );
+    }
+    const onClickProfileLinkButton = ()=>{
+        gsap.to(profileButton.current, {
+            display: "none",
+            duration: .2
+        })
+        gsap.to(profileButtonArrow.current, {
+            rotate: 0,
+
+            duration: .2
+        })
+        setfirst(false)
     }
     const onClickProfileButton = () => {
         if (first) {
@@ -101,7 +113,7 @@ function Nav() {
     return (
         <>
             <SessionProvider>
-                <div className="w-full sticky bg-white top-0 text-lg flex select-none border-b border-zinc-300 justify-between items-center px-6 py-5">
+                <div className="w-full z-40 sticky bg-white top-0 text-lg flex select-none border-b border-zinc-300 justify-between items-center px-6 py-5">
                     <div>
                         <h1 className="text-3xl text-zinc-800 font-bold">
                             New <span className="text-red-500">Zone</span>
