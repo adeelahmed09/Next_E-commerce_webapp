@@ -66,13 +66,13 @@ function AdminSideBar() {
     setopen(false)
   }
   return (
-    <div className='sm:w-[25vw] sm:rounded-none rounded-3xl sm:h-full h-12 sm:flex flex-col overflow-hidden px-5 bg-white  absolute bottom-3  z-0'  ref={adminMenu}>
+    <div className='sm:w-[25vw] sm:rounded-none rounded-3xl sm:h-full h-12 sm:static flex flex-col  overflow-hidden px-5 bg-white  absolute bottom-3  z-50'  ref={adminMenu}>
       <div onClick={onClickHandler} className='mt-2 sm:hidden flex' ref={arrow} ><ArrowRight size={30} strokeWidth={1.5} /></div>
       <div className='w-[80vw] mt-5 sm:flex hidden flex-col' ref={adminDetails}>
         <h1 className='text-3xl font-semibold'>Admin Panel</h1>
         <div className='flex flex-col text-lg mt-2 gap-1'>
-          <Link onClick={menuClose} href={"/admin/dashboard"}>Dashboard</Link>
-          <Link onClick={menuClose} href={"/admin/product"}>Products</Link>
+          <Link  href={"/admin/dashboard"}>Dashboard</Link>
+          <Link  href={"/admin/product"}>Products</Link>
         </div>
       </div>
     </div>

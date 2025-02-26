@@ -11,6 +11,7 @@ export async function POST(request) {
     try {
         const formData = await request.formData();
         const file = formData.get("file")
+        console.log(file);
         if (!file) {
             return NextResponse.json({ error: "File not Found" }, { status: 400 })
         }
@@ -31,7 +32,6 @@ export async function POST(request) {
         return NextResponse.json({imgurl:result.url},{status:200})
     } catch (error) {
         console.log("Upload Image Fieled :",error);
-        
-        return NextResponse.json({error:"upload image failed"},{status:500})
+        return NextResponse.json({error:`upload image failed ${error}`},{status:500})
     }
 }
