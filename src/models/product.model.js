@@ -15,7 +15,7 @@ const productSchema = new Schema({
         required:true,
     },
     publish:{
-        type:Boolean,
+        type:String,
         required:true
     },
     image:{
@@ -23,7 +23,7 @@ const productSchema = new Schema({
         required:true
     },
     price:{
-        type:String,
+        type:Number,
         required:true,
     }
 },{timestamps:true})

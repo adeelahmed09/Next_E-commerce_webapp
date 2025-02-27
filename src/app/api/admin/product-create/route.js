@@ -8,12 +8,8 @@ export async function POST(req){
         await connectDB()
         const {name,desc,stock,price,publish,image} = await req.json()
         console.log(image,"im");
-        if(!name || !desc || !stock || !price || !publish || !image){
+        if(!name || !desc || !publish || !image){
             return res.json({error:"All fields are required!!"},{status:401})
-        }
-        const isNameExisted = await Product.findOne({name})
-        if(isNameExisted){
-            return res.json({error:"Name is already used!!"},{status:401})
         }
         const product = await Product.create({
             name,
