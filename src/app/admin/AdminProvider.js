@@ -13,7 +13,7 @@ function AdminProvider({children}) {
     return(
         <div className="sm:h-[88vh] h-[90vh] flex">
             <AdminSideBar/>
-            <div className=" w-full overflow-y-scroll ">
+            <div className=" w-full scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-transparent scrollbar-thumb-rounded overflow-y-scroll ">
                 {children}
             </div>
         </div>
