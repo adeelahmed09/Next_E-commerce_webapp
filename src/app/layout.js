@@ -12,7 +12,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="bg-zinc-200">
+      <body className="bg-zinc-200 w-full h-full">
         <Providers>
           <Nav/>
           {children}

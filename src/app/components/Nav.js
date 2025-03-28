@@ -5,9 +5,22 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import gsap from 'gsap';
 import { SessionProvider, useSession } from "next-auth/react";
+import { useSelector } from "react-redux";
 
 function Nav() {
     gsap.registerPlugin();
+    const [cartProductAmount, setcartProductAmount] = useState(0)
+    const {totalProduct,totalPrice} = useSelector((state)=>state.cart)
+    useEffect(()=>{
+        console.log("hello nava");
+    },[])
+    useEffect(() => {
+        
+        if (totalProduct) {
+            setcartProductAmount(totalProduct)
+        }
+    }, [totalProduct])
+
     const { data: session, status } = useSession();
     const [first, setfirst] = useState(false)
     const [displayMenu, setdisplayMenu] = useState(false)
@@ -45,14 +58,14 @@ function Nav() {
                         <Link onClick={onClickProfileLinkButton} href={"/profile"}>Profile</Link>
                         <Link onClick={onClickProfileLinkButton} href={"/api/auth/signout"}>Sign Out</Link>
                         {
-                            session.user.role==="admin"?<Link onClick={onClickProfileLinkButton} href={"/admin/dashboard"}>Manage</Link>:""
+                            session.user.role === "admin" ? <Link onClick={onClickProfileLinkButton} href={"/admin/dashboard"}>Manage</Link> : ""
                         }
                     </>
                 )}
             </div>
         );
     }
-    const onClickProfileLinkButton = ()=>{
+    const onClickProfileLinkButton = () => {
         gsap.to(profileButton.current, {
             display: "none",
             duration: .2
@@ -112,7 +125,7 @@ function Nav() {
     }
     return (
         <>
-            <SessionProvider>
+            
                 <div className="w-full z-40 sticky bg-white top-0 text-lg flex select-none border-b border-zinc-300 justify-between items-center px-6 py-5">
                     <div>
                         <h1 className="text-3xl text-zinc-800 font-bold">
@@ -136,7 +149,7 @@ function Nav() {
                         </div>
                         <div className="relative">
                             <div className="absolute w-5 h-5 flex justify-center items-center rounded-full -top-1/4 right-0 bg-red-600">
-                                <h1 className="flex text-white justify-center items-center">0</h1>
+                                <h1 className="flex text-white text-sm justify-center items-center">{cartProductAmount}</h1>
                             </div>
                             <ShoppingCart size={28} strokeWidth={1.5} />
                         </div>
@@ -152,7 +165,7 @@ function Nav() {
                         <li><button className="active:scale-75"><Link href={"/about-us"} className={path === "/about-us" ? `text-red-500` : `` + `hover:text-red-500 active:scale-75`}>About Us</Link></button></li>
                     </ul>
                 </div>
-            </SessionProvider>
+        
         </>
     );
 }
